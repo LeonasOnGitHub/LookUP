@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Berechtigungen -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Für die Nutzung von OpenStreetMap (osmdroid) müssen wir auch Berechtigungen setzen -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,13 +23,30 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.LookUP">
+            android:label="Home"
+            android:theme="@style/LookUpTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CollectionActivity"
+            android:exported="true"
+            android:label="Collection"
+            android:theme="@style/LookUpTheme">
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:exported="true"
+            android:label="Map"
+            android:theme="@style/LookUpTheme">
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="true"
+            android:label="Profile"
+            android:theme="@style/LookUpTheme">
         </activity>
     </application>
 
