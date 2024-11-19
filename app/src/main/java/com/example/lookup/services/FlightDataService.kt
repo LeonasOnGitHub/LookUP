@@ -5,12 +5,12 @@ import org.json.JSONObject
 import java.io.IOException
 import com.example.lookup.models.FlightData
 
-class FlightDataService {
+class FlightDataService: FlightDataInterface {
 
     private val client = OkHttpClient()
     private val apiUrl = "https://opensky-network.org/api/states/all"
 
-    fun getFlightData(callback: (List<FlightData>) -> Unit) {
+    override fun getFlightData(callback: (List<FlightData>) -> Unit) {
         val request = Request.Builder().url(apiUrl).build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -28,6 +28,7 @@ class FlightDataService {
         })
     }
 
+    //parse flight data in FlightData class and adds it to the list
     private fun parseFlightData(jsonData: String): List<FlightData> {
         val flightList = mutableListOf<FlightData>()
         val jsonObject = JSONObject(jsonData)

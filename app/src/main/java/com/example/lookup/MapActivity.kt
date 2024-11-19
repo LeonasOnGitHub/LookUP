@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lookup.databinding.ActivityMapBinding
+import com.example.lookup.services.FlightDataService
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
@@ -12,6 +13,7 @@ class MapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMapBinding
     private lateinit var mapView: MapView
+    private var flightService = FlightDataService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +32,14 @@ class MapActivity : AppCompatActivity() {
         // Karte auf einen Standardort zentrieren (z. B. Berlin)
         val mapController = mapView.controller
         mapController.setZoom(10.0)
-        mapController.setCenter(org.osmdroid.util.GeoPoint(52.5200, 13.4050))
+        mapController.setCenter(org.osmdroid.util.GeoPoint(52.5200, 13.4050)) //TODO set to your current location
 
         // Beispiel-Daten: Marker hinzufügen
         addAircraftMarker(52.5200, 13.4050, "Boeing 747")
         addAircraftMarker(48.8566, 2.3522, "Airbus A320")
+
+        //add aircraft to the map
+        flightService.getFlightData {  }//TODO list chatgpt
 
         // Button-Klick-Listener
         binding.btnRefresh.setOnClickListener {
@@ -50,6 +55,7 @@ class MapActivity : AppCompatActivity() {
         marker.title = title
         mapView.overlays.add(marker)
     }
+
 
     override fun onResume() {
         super.onResume()
