@@ -19,8 +19,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createTable = ("CREATE TABLE $TABLE_NAME ($COLUMN_ID TEXT PRIMARY KEY, "
-                + "$COLUMN_MODEL TEXT, $COLUMN_TIMESTAMP TEXT)")
+        val createTable = ("CREATE TABLE $TABLE_NAME (" +
+                "$COLUMN_ID TEXT PRIMARY KEY, " +
+                "$COLUMN_MODEL TEXT, " +
+                "$COLUMN_TIMESTAMP TEXT)")
         db?.execSQL(createTable)
     }
 
