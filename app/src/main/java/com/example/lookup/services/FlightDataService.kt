@@ -9,6 +9,7 @@ class FlightDataService: FlightDataInterface {
 
     private val client = OkHttpClient()
     private val apiUrl = "https://opensky-network.org/api/states/all"
+    //private val apiUrl = "https://opensky-network.org/api/states/all?lamin=45.8389&lomin=5.9962&lamax=47.8229&lomax=10.5226"
 
     override fun getFlightData(callback: (List<FlightData>) -> Unit) {
         val request = Request.Builder().url(apiUrl).build()
@@ -38,8 +39,9 @@ class FlightDataService: FlightDataInterface {
             val flight = states.getJSONArray(i)
             val flightData = FlightData(
                 id = flight.optString(0, null),
-                latitude =  flight.optDouble(5),
-                longitude = flight.optDouble(6)
+                callSign = flight.optString(1, null),
+                longitude =  flight.optDouble(5),
+                latitude = flight.optDouble(6)
             )
             flightList.add(flightData)
         }

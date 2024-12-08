@@ -32,27 +32,28 @@ class MapActivity : AppCompatActivity() {
         // Karte auf einen Standardort zentrieren (z. B. Berlin)
         val mapController = mapView.controller
         mapController.setZoom(10.0)
-        mapController.setCenter(org.osmdroid.util.GeoPoint(52.5200, 13.4050)) //TODO set to your current location
-
-        // Beispiel-Daten: Marker hinzufügen
-        addAircraftMarker(52.5200, 13.4050, "Boeing 747")
-        addAircraftMarker(48.8566, 2.3522, "Airbus A320")
+        mapController.setCenter(
+            org.osmdroid.util.GeoPoint(
+                52.5200,
+                13.4050
+            )
+        ) //TODO set to your current location
 
         //add aircraft to the map
-        flightService.getFlightData { flightList ->
-            flightList.forEach{ flight ->
-                addAircraftMarker(flight.latitude, flight.longitude, "Api Test Flight")
-            }
-        }
+        addAirplanes()
 
         // Button-Klick-Listener
         binding.btnRefresh.setOnClickListener {
             Toast.makeText(this, "Refreshing aircraft data...", Toast.LENGTH_SHORT).show()
+            mapView.overlays.clear()
+            addAirplanes()
+        }
+    }
 
-            flightService.getFlightData { flightList ->
-                flightList.forEach{ flight ->
-                    addAircraftMarker(flight.latitude, flight.longitude, "Api Test Flight")
-                }
+    private fun addAirplanes() {
+        flightService.getFlightData { flightList ->
+            flightList.forEach { flight ->
+                addAircraftMarker(flight.latitude, flight.longitude, flight.callSign)
             }
         }
     }
