@@ -37,13 +37,15 @@ class FlightDataService: FlightDataInterface {
 
         for (i in 0 until states.length()) {
             val flight = states.getJSONArray(i)
-            val flightData = FlightData(
-                id = flight.optString(0, null),
-                callSign = flight.optString(1, null),
-                longitude =  flight.optDouble(5),
-                latitude = flight.optDouble(6)
-            )
-            flightList.add(flightData)
+            if (!flight.getBoolean(8)) {
+                    val flightData = FlightData(
+                        id = flight.optString(0, null),
+                        callSign = flight.optString(1, null),
+                        longitude = flight.optDouble(5),
+                        latitude = flight.optDouble(6)
+                    )
+                    flightList.add(flightData)
+                }
         }
 
         return flightList

@@ -3,6 +3,7 @@ package com.example.lookup
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.lookup.databinding.ActivityMapBinding
 import com.example.lookup.services.FlightDataService
 import org.osmdroid.config.Configuration
@@ -42,7 +43,7 @@ class MapActivity : AppCompatActivity() {
         //add aircraft to the map
         addAirplanes()
 
-        // Button-Klick-Listener
+        // Button-click-Listener
         binding.btnRefresh.setOnClickListener {
             Toast.makeText(this, "Refreshing aircraft data...", Toast.LENGTH_SHORT).show()
             mapView.overlays.clear()
@@ -63,6 +64,7 @@ class MapActivity : AppCompatActivity() {
         marker.position = org.osmdroid.util.GeoPoint(lat, lon)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         marker.title = title
+        marker.icon = ContextCompat.getDrawable(this, R.drawable.airplan)
         mapView.overlays.add(marker)
     }
 
