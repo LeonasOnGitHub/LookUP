@@ -39,12 +39,21 @@ class MapActivity : AppCompatActivity() {
         addAircraftMarker(48.8566, 2.3522, "Airbus A320")
 
         //add aircraft to the map
-        flightService.getFlightData {  }//TODO list chatgpt
+        flightService.getFlightData { flightList ->
+            flightList.forEach{ flight ->
+                addAircraftMarker(flight.latitude, flight.longitude, "Api Test Flight")
+            }
+        }
 
         // Button-Klick-Listener
         binding.btnRefresh.setOnClickListener {
             Toast.makeText(this, "Refreshing aircraft data...", Toast.LENGTH_SHORT).show()
-            // Hier kannst du neue Daten laden
+
+            flightService.getFlightData { flightList ->
+                flightList.forEach{ flight ->
+                    addAircraftMarker(flight.latitude, flight.longitude, "Api Test Flight")
+                }
+            }
         }
     }
 
