@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation("org.osmdroid:osmdroid-android:6.1.14")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
