@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lookup.database.DatabaseHelper
 import com.example.lookup.databinding.ActivityCollectionBinding
-import com.example.lookup.models.Aircraft
 
 class CollectionActivity : AppCompatActivity() {
 
@@ -20,8 +19,8 @@ class CollectionActivity : AppCompatActivity() {
         // Initialize database helper
         databaseHelper = DatabaseHelper(this)
 
-        // Get the list of collected aircrafts
-        val aircraftList = databaseHelper.getAllAircrafts()
+        // Get the list of collected airplanes
+        val aircraftList = databaseHelper.getAllAirplanes()
 
         // Setup RecyclerView
         binding.rvCollection.layoutManager = LinearLayoutManager(this)

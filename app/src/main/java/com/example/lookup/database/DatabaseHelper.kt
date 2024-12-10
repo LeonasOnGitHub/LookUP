@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.lookup.models.Aircraft
 
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION), DatabaseInterface {
 
     companion object {
         private const val DATABASE_NAME = "flightTracker.db"
@@ -22,7 +22,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val createTable = ("CREATE TABLE $TABLE_NAME (" +
                 "$COLUMN_ID TEXT PRIMARY KEY, " +
                 "$COLUMN_MODEL TEXT, " +
-                "$COLUMN_TIMESTAMP TEXT)")
+                "$COLUMN_TIMESTAMP BLOB)")
         db?.execSQL(createTable)
     }
 
@@ -31,7 +31,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
-    fun addAircraft(aircraft: Aircraft): Boolean {
+    override fun addAircraft(aircraft: Aircraft): Boolean {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(COLUMN_ID, aircraft.id)
@@ -43,8 +43,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return (result != -1L)
     }
 
+    override fun getMostRecentAirplanes(): List<Aircraft> {
+        TODO("Not yet implemented")
+    }
+
     @SuppressLint("Range")
-    fun getAllAircrafts(): List<Aircraft> {
+    override fun getAllAirplanes(): List<Aircraft> {
         val aircraftList = mutableListOf<Aircraft>()
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
@@ -54,7 +58,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 val aircraft = Aircraft(
                     id = cursor.getString(cursor.getColumnIndex(COLUMN_ID)),
                     model = cursor.getString(cursor.getColumnIndex(COLUMN_MODEL)),
-                    timestamp = cursor.getString(cursor.getColumnIndex(COLUMN_TIMESTAMP))
+                    timestamp = cursor.getLong(cursor.getColumnIndex(COLUMN_TIMESTAMP))
                 )
                 aircraftList.add(aircraft)
             } while (cursor.moveToNext())
