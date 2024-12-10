@@ -4,24 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#1a1b26">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="212dp"
+        android:textSize="60sp"
+        android:textAlignment="center"
+        android:textFontWeight="3000"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        android:layout_marginTop="30sp"
+        android:text="@string/welcome_to_lookup" />
 
     <Button
-        android:id="@+id/btnMap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Map" />
+        android:id="@+id/map_btn"
+
+        android:layout_width="376dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Map"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
     <Button
-        android:id="@+id/btnCollection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Collection" />
+        android:id="@+id/collection_btn"
+
+        android:layout_width="376dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+        android:layout_marginBottom="20dp"
+
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Collection"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
     <Button
-        android:id="@+id/btnProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile" />
+        android:id="@+id/profile_btn"
+
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:background="@drawable/buttonshape"
+
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="Profile"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
 
 </LinearLayout>

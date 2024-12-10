@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LookUP</string>
+    <string name="welcome_to_lookup">Welcome to LookUp</string>
 </resources>
