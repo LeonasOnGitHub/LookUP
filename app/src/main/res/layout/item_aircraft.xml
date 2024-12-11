@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:elevation="4dp">
 
     <TextView
-        android:id="@+id/tvModel"
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Model"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:text="Dies ist ein PopupWindow" />
 
-    <TextView
-        android:id="@+id/tvTimestamp"
+    <Button
+        android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Timestamp"
-        android:textSize="14sp" />
+        android:text="Schließen" />
 </LinearLayout>

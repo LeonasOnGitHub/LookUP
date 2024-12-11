@@ -3,6 +3,10 @@ package com.example.lookup
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Gravity
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -84,20 +88,45 @@ class MapActivity : AppCompatActivity() {
     private fun addAirplanes() {
         flightService.getFlightData { flightList ->
             flightList.forEach { flight ->
-                addMarker(flight.latitude, flight.longitude, flight.callSign, R.drawable.airplan)
+                addMarker(flight.latitude, flight.longitude, flight.id, R.drawable.airplan)
             }
         }
     }
 
-    private fun addMarker(lat: Double, lon: Double, title: String, icon: Int) {
+    private fun addMarker(lat: Double, lon: Double, id: String, icon: Int) {
         val marker = Marker(mapView)
         marker.position = org.osmdroid.util.GeoPoint(lat, lon)
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        marker.title = title
+        marker.title = id
         marker.icon = ContextCompat.getDrawable(this, icon)
+        marker.setOnMarkerClickListener { clickedMarker, mapView ->
+            // Show a popup with the title and description
+            showPopup(id)
+            true // Return true to indicate the click was handled
+        }
         mapView.overlays.add(marker)
     }
 
+    private fun showPopup(id: String) {
+        val popupView = layoutInflater.inflate(R.layout.item_aircraft, null)
+
+        // Erstelle das PopupWindow
+        val popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        // Zeige das PopupWindow
+        popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0)
+
+        // Interaktion mit den Elementen im Layout
+        val btnClose = popupView.findViewById<Button>(R.id.btnClose)
+        btnClose.setOnClickListener {
+            popupWindow.dismiss() // Schließen des Popups
+        }
+    }
 
     override fun onResume() {
         super.onResume()

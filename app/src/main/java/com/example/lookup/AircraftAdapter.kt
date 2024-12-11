@@ -19,13 +19,13 @@ class AircraftAdapter(private val aircraftList: List<Aircraft>) :
     override fun onBindViewHolder(holder: AircraftViewHolder, position: Int) {
         val aircraft = aircraftList[position]
         holder.tvModel.text = aircraft.model
-        holder.tvTimestamp.text = aircraft.timestamp
+        holder.tvTimestamp.text = aircraft.timestamp.toString()
     }
 
     override fun getItemCount(): Int = aircraftList.size
 
     class AircraftViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvModel: TextView = itemView.findViewById(R.id.tvModel)
-        val tvTimestamp: TextView = itemView.findViewById(R.id.tvTimestamp)
+        val tvModel: TextView = itemView.findViewById(R.id.tvTitle)
+        val tvTimestamp: TextView = itemView.findViewById(R.id.tvTitle) //#TODO
     }
 }

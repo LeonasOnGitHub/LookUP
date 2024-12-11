@@ -42,7 +42,9 @@ class FlightDataService: FlightDataInterface {
                         id = flight.optString(0, null),
                         callSign = flight.optString(1, null),
                         longitude = flight.optDouble(5),
-                        latitude = flight.optDouble(6)
+                        latitude = flight.optDouble(6),
+                        origin = flight.getString(2),
+                        category = flight.getInt(16)
                     )
                     flightList.add(flightData)
                 }

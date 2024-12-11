@@ -1,6 +1,7 @@
 package com.example.lookup.database
 
 import com.example.lookup.models.Aircraft
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import java.sql.Timestamp
 
@@ -20,6 +21,9 @@ class DatabaseHelperTest {
 
         val airplanes = db.getAllAirplanes()
 
-        
+        assertEquals(airplanes.size, 1)
+        assertEquals(airplanes[0].id, "1")
+        assertEquals(airplanes[0].model, "test")
+        assertEquals(airplanes[0].timestamp, time)
     }
 }
