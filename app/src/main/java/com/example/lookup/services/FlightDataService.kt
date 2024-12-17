@@ -4,6 +4,7 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import com.example.lookup.models.FlightData
+import org.json.JSONArray
 
 class FlightDataService: FlightDataInterface {
 
@@ -29,6 +30,24 @@ class FlightDataService: FlightDataInterface {
         })
     }
 
+    override fun getFlightDataById(id: String):String {
+        val request = Request.Builder().url(apiUrl).build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException):  {
+                e.printStackTrace()
+                callback()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string()?.let {
+                    val flightList = parseFlightData(it)
+                    callback(flightList)
+                }
+            }
+        })
+    }
+
     //parse flight data in FlightData class and adds it to the list
     private fun parseFlightData(jsonData: String): List<FlightData> {
         val flightList = mutableListOf<FlightData>()
@@ -38,19 +57,23 @@ class FlightDataService: FlightDataInterface {
         for (i in 0 until states.length()) {
             val flight = states.getJSONArray(i)
             if (!flight.getBoolean(8)) {
-                    val flightData = FlightData(
-                        id = flight.optString(0, null),
-                        callSign = flight.optString(1, null),
-                        longitude = flight.optDouble(5),
-                        latitude = flight.optDouble(6),
-                        origin = flight.getString(2),
-                        category = flight.getInt(16)
-                    )
-                    flightList.add(flightData)
+                    flightList.add(getFlightDataObj(flight))
                 }
         }
 
         return flightList
+    }
+
+    private fun getFlightDataObj(flight: JSONArray): FlightData {
+        val flightData = FlightData(
+            id = flight.optString(0, null),
+            callSign = flight.optString(1, null),
+            longitude = flight.optDouble(5),
+            latitude = flight.optDouble(6),
+            origin = flight.getString(2),
+            category = flight.getInt(16)
+        )
+        return flightData
     }
 }
 
