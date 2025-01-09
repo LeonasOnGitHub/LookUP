@@ -43,7 +43,7 @@ class FlightDataService: FlightDataInterface {
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let {
                     val flightList = parseFlightData(it)
-                    callback(flightList.get(0))
+                    callback(flightList[0])
                 }
             }
         })

@@ -129,7 +129,7 @@ class MapActivity : AppCompatActivity() {
                  tvId.text = "ID: ${flight.id}"
                  tvOrigen.text ="Origen: ${flight.origin}"
                  tvCategory.text = "Category: ${flight.category}"
-                 tvVelocity.text = "Velocety: ${flight.velocity} m/s"
+                 tvVelocity.text = "Velocity: ${flight.velocity} m/s"
             } else {
                 // Falls das Flugzeug nicht gefunden wurde
                 Toast.makeText(this, "No data found for this flight ID", Toast.LENGTH_SHORT).show()
