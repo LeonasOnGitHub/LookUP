@@ -37,13 +37,23 @@ class FlightDataService: FlightDataInterface {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException)  {
                 e.printStackTrace()
-                callback(FlightData("", "", 0.0,0.0,"",0, 0.0))
+                android.os.Handler(android.os.Looper.getMainLooper()).post {
+                    callback(FlightData("", "", 0.0,0.0,"",0, 0.0))
+                }
+
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let {
                     val flightList = parseFlightData(it)
-                    callback(flightList[0])
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        callback(flightList[0])
+                    }
+                }?: run {
+                    // Response-Body ist null
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        callback(null)
+                    }
                 }
             }
         })
