@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Rahmen (Border) -->
+    <stroke
+        android:width="2dp"
+        android:color="#000000" /> <!-- Farbe des Rahmens (Schwarz) -->
+
+
+    <!-- Hintergrundfarbe -->
+    <solid android:color="#FFFFFF" /> <!-- Weißer Hintergrund -->
+
+    <!-- Optional: Abgerundete Ecken -->
+    <corners android:radius="8dp" />
+</shape>

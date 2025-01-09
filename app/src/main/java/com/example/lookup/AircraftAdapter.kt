@@ -13,18 +13,18 @@ class AircraftAdapter(private val aircraftList: List<FlightData>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AircraftViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_aircraft, parent, false)
+            .inflate(R.layout.item_aircraft_collection, parent, false)
         return AircraftViewHolder(view)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AircraftViewHolder, position: Int) {
         val aircraft = aircraftList[position]
-        holder.tvCallsign.text = aircraft.callSign
-        holder.tvId.text = aircraft.id
-        holder.tvOrigen.text = aircraft.origin
-        holder.tvCategory.text = aircraft.category.toString()
-        holder.tvVelocity.text = aircraft.velocity.toString()
+        holder.tvCallsign.text = "Callsign: ${aircraft.callSign}"
+        holder.tvId.text = "ID: ${aircraft.id}"
+        holder.tvOrigen.text = "Origen: ${aircraft.origin}"
+        holder.tvCategory.text = "Category: ${aircraft.category}"
+        holder.tvVelocity.text = "Velocity: ${aircraft.velocity} m/s"
         //holder.tvLat.text = aircraft.latitude.toString()
         //holder.tvLong.text = aircraft.longitude.toString()
     }

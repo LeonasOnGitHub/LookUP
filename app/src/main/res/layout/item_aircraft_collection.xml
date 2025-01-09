@@ -51,18 +51,4 @@
         android:textSize="16sp"
         android:paddingBottom="16dp" />
 
-    <!-- Schließen-Button -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add to Collection" />
-
-    <!-- Schließen-Button -->
-    <Button
-        android:id="@+id/btnClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close" />
-
 </LinearLayout>
