@@ -110,6 +110,8 @@ class MapActivity : AppCompatActivity() {
     private fun showPopup(id: String) {
         val popupView = layoutInflater.inflate(R.layout.item_aircraft, null)
 
+
+
         // Erstelle das PopupWindow
         val popupWindow = PopupWindow(
             popupView,

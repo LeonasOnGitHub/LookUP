@@ -30,13 +30,14 @@ class FlightDataService: FlightDataInterface {
         })
     }
 
-    override fun getFlightDataById(id: String):String {
-        val request = Request.Builder().url(apiUrl).build()
+    override fun getFlightDataById(id: String, callback: (List<FlightData>) -> Unit) {
+        val apiUrlWithId = "$apiUrl?icao24=$id"
+        val request = Request.Builder().url(apiUrlWithId).build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException):  {
+            override fun onFailure(call: Call, e: IOException)  {
                 e.printStackTrace()
-                callback()
+                callback(emptyList())
             }
 
             override fun onResponse(call: Call, response: Response) {
