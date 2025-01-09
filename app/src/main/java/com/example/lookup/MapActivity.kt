@@ -1,6 +1,7 @@
 package com.example.lookup
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Gravity
@@ -13,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.lookup.databinding.ActivityMapBinding
+import com.example.lookup.models.FlightData
 import com.example.lookup.services.FlightDataService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import org.json.JSONArray
+import org.json.JSONObject
 import org.osmdroid.config.Configuration
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
@@ -111,8 +115,10 @@ class MapActivity : AppCompatActivity() {
     private fun showPopup(id: String) {
         val popupView = layoutInflater.inflate(R.layout.item_aircraft, null)
 
+        var flightToSave = FlightData("", "", 0.0,0.0,"",0, 0.0)
         flightService.getFlightDataById(id) { flight ->
             if (flight != null){
+                flightToSave = flight
                 val tvCallsign = popupView.findViewById<TextView>(R.id.tvCallSign)
                 val tvId = popupView.findViewById<TextView>(R.id.tvId)
                 val tvOrigen = popupView.findViewById<TextView>(R.id.tvOrigen)
@@ -148,6 +154,25 @@ class MapActivity : AppCompatActivity() {
         btnClose.setOnClickListener {
             popupWindow.dismiss() // Schließen des Popups
         }
+
+        val btnSave = popupView.findViewById<Button>(R.id.btnSave)
+        btnSave.setOnClickListener {
+            Toast.makeText(this, "Aircraft added to Collection!", Toast.LENGTH_SHORT).show()
+            saveFlightData(flightToSave)
+        }
+    }
+
+    private fun saveFlightData(flight: FlightData) {
+        val sharedPreferences = getSharedPreferences("FlightDataPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        val jsonString = sharedPreferences.getString("savedFlightList", "[]")
+        val jsonArray = JSONArray(jsonString)
+
+        jsonArray.put(JSONObject(flight.toJSON()))
+
+        editor.putString("savedFlightList", jsonArray.toString())
+        editor.apply()
     }
 
     override fun onResume() {

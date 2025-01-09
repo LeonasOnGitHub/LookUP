@@ -1,6 +1,5 @@
 package com.example.lookup.database
 
-import com.example.lookup.models.Aircraft
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import java.sql.Timestamp

@@ -1,7 +1,5 @@
 package com.example.lookup.database
-
-import com.example.lookup.models.Aircraft
-
+/*
 interface DatabaseInterface {
 
     /**
@@ -18,4 +16,4 @@ interface DatabaseInterface {
      * returns
      */
     fun getMostRecentAirplanes(): List<Aircraft>
-}
+}*/
