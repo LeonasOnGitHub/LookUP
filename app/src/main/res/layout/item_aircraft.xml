@@ -1,21 +1,68 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@android:color/white"
     android:padding="16dp"
-    android:elevation="4dp">
+    android:background="@color/white"
+ >
 
+    <!-- Flugzeugmodell -->
     <TextView
-        android:id="@+id/tvMessage"
+        android:id="@+id/tvCallSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dies ist ein PopupWindow" />
+        android:text="Callsign: Unknown"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp" />
 
+    <!-- id -->
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: Unknown"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvOrigen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Origen: Unknown"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category: Unknown"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
+
+    <!-- Velocity -->
+    <TextView
+        android:id="@+id/tvVelocity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Velocity: Unknown"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
+
+    <!-- Schließen-Button -->
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to Collection" />
+
+    <!-- Schließen-Button -->
     <Button
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Schließen" />
+        android:text="Close" />
+
 </LinearLayout>

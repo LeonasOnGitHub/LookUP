@@ -30,20 +30,20 @@ class FlightDataService: FlightDataInterface {
         })
     }
 
-    override fun getFlightDataById(id: String, callback: (List<FlightData>) -> Unit) {
+    override fun getFlightDataById(id: String, callback: (FlightData?) -> Unit) {
         val apiUrlWithId = "$apiUrl?icao24=$id"
         val request = Request.Builder().url(apiUrlWithId).build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException)  {
                 e.printStackTrace()
-                callback(emptyList())
+                callback(FlightData("", "", 0.0,0.0,"",0, 0.0))
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let {
                     val flightList = parseFlightData(it)
-                    callback(flightList)
+                    callback(flightList.get(0))
                 }
             }
         })
@@ -72,7 +72,8 @@ class FlightDataService: FlightDataInterface {
             longitude = flight.optDouble(5),
             latitude = flight.optDouble(6),
             origin = flight.getString(2),
-            category = flight.getInt(16)
+            category = flight.getInt(16),
+            velocity = flight.getDouble(9)
         )
         return flightData
     }

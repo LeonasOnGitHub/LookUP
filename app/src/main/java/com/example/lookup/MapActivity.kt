@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -110,7 +111,26 @@ class MapActivity : AppCompatActivity() {
     private fun showPopup(id: String) {
         val popupView = layoutInflater.inflate(R.layout.item_aircraft, null)
 
+        flightService.getFlightDataById(id) { flight ->
+            if (flight != null){
+                val tvCallsign = popupView.findViewById<TextView>(R.id.tvCallSign)
+                val tvId = popupView.findViewById<TextView>(R.id.tvId)
+                val tvOrigen = popupView.findViewById<TextView>(R.id.tvOrigen)
+                val tvCategory = popupView.findViewById<TextView>(R.id.tvCategory)
+                val tvVelocity = popupView.findViewById<TextView>(R.id.tvVelocity)
 
+                 tvCallsign.text = "Callsign: ${flight.callSign}"
+                 tvId.text = "ID: ${flight.id}"
+                 tvOrigen.text ="Origen: ${flight.origin}"
+                 tvCategory.text = "Category: ${flight.category}"
+                 tvVelocity.text = "Velocety: ${flight.velocity} m/s"
+            } else {
+                // Falls das Flugzeug nicht gefunden wurde
+                Toast.makeText(this, "No data found for this flight ID", Toast.LENGTH_SHORT).show()
+                return@getFlightDataById
+            }
+
+        }
 
         // Erstelle das PopupWindow
         val popupWindow = PopupWindow(

@@ -6,5 +6,6 @@ data class FlightData(
     val latitude: Double,
     val longitude: Double,
     val origin: String,
-    val category: Int
+    val category: Int,
+    val velocity: Double
 )

@@ -12,5 +12,5 @@ interface FlightDataInterface {
     /**
      * returns an data object with information about the flight with the given id
      */
-    fun getFlightDataById(id: String, callback: (List<FlightData>) -> Unit)
+    fun getFlightDataById(id: String, callback: (FlightData?) -> Unit)
 }
