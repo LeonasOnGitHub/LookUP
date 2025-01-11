@@ -1,28 +1,32 @@
 package com.example.lookup
 
-import junit.framework.TestCase.assertEquals
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import com.google.common.truth.Truth.assertThat
+import org.robolectric.Robolectric
 
-
+@RunWith(RobolectricTestRunner::class)
 class ProfileTest {
-    private lateinit var profile: ProfileActivity
 
     @Test
-    fun testSaveAndRetrieveUsername() {
-        val username = "test_user"
-        val favAircraft = "test_craft"
+    fun testSaveAndRetrieveProfileData() {
+        // Simuliere eine Android-Umgebung
+        val profile = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
 
-        // Speichern des Benutzernamens
-        profile.saveProfileData(username, favAircraft)
 
-        // Abrufen und Prüfen
-        val retrievedProfile = profile.getProfileData()
-        assertEquals(ProfileData(username, favAircraft), retrievedProfile)
+        // Speichere Daten
+        val name = "John Doe"
+        val favoriteModel = "Boeing 747"
+        profile.saveProfileData(name, favoriteModel)
+
+        // Rufe die gespeicherten Daten ab
+        val profileData = profile.getProfileData()
+
+        // Prüfe die Daten
+        assertThat(profileData.name).isEqualTo(name)
+        assertThat(profileData.favAircraft).isEqualTo(favoriteModel)
     }
-
-    data class ProfileData(
-        val name: String,
-        val favAircraft: String
-    )
-
 }

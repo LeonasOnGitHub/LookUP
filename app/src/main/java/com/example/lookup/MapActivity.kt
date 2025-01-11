@@ -49,7 +49,7 @@ class MapActivity : AppCompatActivity() {
 
         // Initialize Fused Location Provider
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        getCurrentLocation()
+        setCurrentLocation()
 
 
         //add aircraft to the map
@@ -64,7 +64,7 @@ class MapActivity : AppCompatActivity() {
     }
 
     // Check location permission and fetch current location
-    private fun getCurrentLocation() {
+    private fun setCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION

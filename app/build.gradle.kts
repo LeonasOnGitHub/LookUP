@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,14 @@ android {
     namespace = "com.example.lookup"
     compileSdk = 34
 
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+        )
+        )
+    }
     defaultConfig {
         applicationId = "com.example.lookup"
         minSdk = 24
@@ -62,15 +72,26 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.recyclerview)
-    implementation("org.osmdroid:osmdroid-android:6.1.14")
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(libs.osmdroid.android)
+    implementation(libs.okhttp)
     implementation(libs.play.services.location)
     implementation(libs.core.ktx)
+    testImplementation (libs.truth)
     testImplementation(libs.junit)
+    testImplementation (libs.mockk)
+    testImplementation (libs.robolectric)
+    androidTestImplementation (libs.mockk.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test:runner:1.4.0")
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.0")
+    testImplementation ("io.mockk:mockk:1.10.0")
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
