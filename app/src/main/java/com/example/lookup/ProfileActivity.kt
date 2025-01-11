@@ -17,23 +17,44 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+
 
         // Load saved data
-        binding.etName.setText(sharedPreferences.getString("name", ""))
-        binding.etFavoriteModel.setText(sharedPreferences.getString("favoriteModel", ""))
+        val profileData = getProfileData()
+        binding.etName.setText(profileData.name)
+        binding.etFavoriteModel.setText(profileData.favAircraft)
 
         // Save data when button is clicked
         binding.btnSave.setOnClickListener {
             val name = binding.etName.text.toString()
             val favoriteModel = binding.etFavoriteModel.text.toString()
-
-            val editor = sharedPreferences.edit()
-            editor.putString("name", name)
-            editor.putString("favoriteModel", favoriteModel)
-            editor.apply()
+            saveProfileData(name, favoriteModel)
 
             Toast.makeText(this, "Profile saved!", Toast.LENGTH_SHORT).show()
         }
+
+    }
+
+    fun getProfileData(): ProfileData {
+        sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+        val name = sharedPreferences.getString("name", "")
+        val favAircraft = sharedPreferences.getString("favoriteModel", "")
+
+        return ProfileData(name.toString(), favAircraft.toString())
+    }
+
+    fun saveProfileData(name: String, favAircraft: String){
+        sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+        editor.putString("name", name)
+        editor.putString("favoriteModel", favAircraft)
+        editor.apply()
+
     }
 }
+
+data class ProfileData(
+    val name: String,
+    val favAircraft: String
+)

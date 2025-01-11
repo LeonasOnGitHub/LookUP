@@ -22,16 +22,16 @@ class CollectionActivity : AppCompatActivity() {
 
 
         // Get the list of collected airplanes
-        val aircraftList = getFlightDataList(this)
+        val aircraftList = getSharedPrefList(this, "FlightDataPrefs", "savedFlightList")
 
         // Setup RecyclerView
         binding.rvCollection.layoutManager = LinearLayoutManager(this)
         binding.rvCollection.adapter = AircraftAdapter(aircraftList)
     }
 
-    private fun getFlightDataList(context: Context): List<FlightData> {
-        val sharedPreferences = context.getSharedPreferences("FlightDataPrefs", Context.MODE_PRIVATE)
-        val jsonString = sharedPreferences.getString("savedFlightList", "[]")
+    private fun getSharedPrefList(context: Context, name: String, key: String): List<FlightData> {
+        val sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
+        val jsonString = sharedPreferences.getString(key, "[]")
         val jsonArray = JSONArray(jsonString)
 
         val flightList = mutableListOf<FlightData>()
