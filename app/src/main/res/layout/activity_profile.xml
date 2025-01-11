@@ -19,14 +19,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your name"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:maxLength="20"/>
 
     <EditText
         android:id="@+id/etFavoriteModel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Favorite aircraft model"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:maxLength="20"/>
 
     <Button
         android:id="@+id/btnSave"

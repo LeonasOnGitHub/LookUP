@@ -77,4 +77,79 @@ class ProfileTest {
             assertEquals( "Concorde", savedFavModel)
         }
     }
+
+    @Test
+    fun testActivitySavesEmptyData() {
+        val scenario = ActivityScenario.launch(ProfileActivity::class.java)
+
+        scenario.onActivity { activity ->
+            val etName = activity.findViewById<EditText>(R.id.etName)
+            val etFavModel = activity.findViewById<EditText>(R.id.etFavoriteModel)
+            val btnSave = activity.findViewById<Button>(R.id.btnSave)
+
+            // Neue Daten eingeben und speichern
+            etName.setText("")
+            etFavModel.setText("")
+            btnSave.performClick()
+
+            // Überprüfen, ob SharedPreferences aktualisiert wurde
+            val savedName = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("name", "")
+            val savedFavModel = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("favoriteModel", "")
+
+            assertEquals( "", savedName)
+            assertEquals( "", savedFavModel)
+        }
+    }
+
+    @Test
+    fun testActivitySavesMaxData() {
+        val scenario = ActivityScenario.launch(ProfileActivity::class.java)
+
+        scenario.onActivity { activity ->
+            val etName = activity.findViewById<EditText>(R.id.etName)
+            val etFavModel = activity.findViewById<EditText>(R.id.etFavoriteModel)
+            val btnSave = activity.findViewById<Button>(R.id.btnSave)
+
+            // Neue Daten eingeben und speichern
+            etName.setText("aaaaaaaaaaaaaaaaaaaa")
+            etFavModel.setText("bbbbbbbbbbbbbbbbbbbb")
+            btnSave.performClick()
+
+            // Überprüfen, ob SharedPreferences aktualisiert wurde
+            val savedName = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("name", "")
+            val savedFavModel = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("favoriteModel", "")
+
+            assertEquals( "aaaaaaaaaaaaaaaaaaaa", savedName)
+            assertEquals( "bbbbbbbbbbbbbbbbbbbb", savedFavModel)
+        }
+    }
+
+    @Test
+    fun testActivitySavesToMuchData() {
+        val scenario = ActivityScenario.launch(ProfileActivity::class.java)
+
+        scenario.onActivity { activity ->
+            val etName = activity.findViewById<EditText>(R.id.etName)
+            val etFavModel = activity.findViewById<EditText>(R.id.etFavoriteModel)
+            val btnSave = activity.findViewById<Button>(R.id.btnSave)
+
+            // Neue Daten eingeben und speichern
+            etName.setText("aaaaaaaaaaaaaaaaaaaax")
+            etFavModel.setText("bbbbbbbbbbbbbbbbbbbby")
+            btnSave.performClick()
+
+            // Überprüfen, ob SharedPreferences aktualisiert wurde
+            val savedName = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("name", "")
+            val savedFavModel = activity.getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+                .getString("favoriteModel", "")
+
+            assertEquals( "aaaaaaaaaaaaaaaaaaaa", savedName)
+            assertEquals( "bbbbbbbbbbbbbbbbbbbb", savedFavModel)
+        }
+    }
 }

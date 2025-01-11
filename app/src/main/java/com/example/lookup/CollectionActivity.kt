@@ -18,8 +18,6 @@ class CollectionActivity : AppCompatActivity() {
         binding = ActivityCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize database helper
-
 
         // Get the list of collected airplanes
         val aircraftList = getSharedPrefList(this, "FlightDataPrefs", "savedFlightList")
