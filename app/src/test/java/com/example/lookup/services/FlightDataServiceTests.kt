@@ -41,12 +41,11 @@ class FlightDataServiceTests {
     }
 
     @Test
-    fun `test getFlightData returns valid data`() {
+    fun testGetFlightDataReturnsValidSata() {
         // Mocking the JSONObject and JSONArray
         val mockJson = mockk<JSONObject>()
         val mockStatesArray = mockk<JSONArray>()
         val mockFlightArray = mockk<JSONArray>()
-        val mockFlightData = mockk<FlightData>()
 
         every { mockJson.getJSONArray("states") } returns mockStatesArray
         every { mockStatesArray.length() } returns 1
@@ -77,7 +76,7 @@ class FlightDataServiceTests {
 
 
     @Test
-    fun `test getFlightData handles failure correctly`() {
+    fun testGetFlightDataHandlesFailureCorrectly() {
         // Enqueue a failure response
         mockWebServer.enqueue(MockResponse().setResponseCode(500))
 

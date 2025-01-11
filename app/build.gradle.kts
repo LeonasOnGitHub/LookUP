@@ -3,6 +3,8 @@ import com.android.build.api.dsl.Packaging
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+
 }
 
 android {
@@ -95,6 +97,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core.v351)
     androidTestImplementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.androidx.recyclerview.v131)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

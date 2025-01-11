@@ -60,6 +60,7 @@ class MapActivity : AppCompatActivity() {
             Toast.makeText(this, "Refreshing aircraft data...", Toast.LENGTH_SHORT).show()
             mapView.overlays.clear()
             addAirplanes()
+            setCurrentLocation()
         }
     }
 
