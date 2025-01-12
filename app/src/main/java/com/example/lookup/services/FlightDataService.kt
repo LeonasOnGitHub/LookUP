@@ -79,11 +79,11 @@ class FlightDataService: FlightDataInterface {
         val flightData = FlightData(
             id = flight.optString(0, null),
             callSign = flight.optString(1, null),
-            longitude = flight.optDouble(5),
-            latitude = flight.optDouble(6),
-            origin = flight.getString(2),
-            category = flight.getInt(16),
-            velocity = flight.getDouble(9)
+            longitude = flight.optDouble(5, 0.0),
+            latitude = flight.optDouble(6, 0.0),
+            origin = flight.optString(2, null),
+            category = flight.optInt(16, 0),
+            velocity = flight.optDouble(9, 0.0)
         )
         return flightData
     }
