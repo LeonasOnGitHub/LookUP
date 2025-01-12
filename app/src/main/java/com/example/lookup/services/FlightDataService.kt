@@ -52,7 +52,7 @@ class FlightDataService: FlightDataInterface {
                 }?: run {
                     // Response-Body ist null
                     android.os.Handler(android.os.Looper.getMainLooper()).post {
-                        callback(null)
+                        callback(FlightData("", "", 0.0,0.0,"",0, 0.0))
                     }
                 }
             }

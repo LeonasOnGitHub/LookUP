@@ -49,16 +49,16 @@ class MainActivityTest {
 
     }
 
-//    @Test
-//    fun testButtonClicksStartCorrectActivityMap() {
-//        // Starte die MainActivity
-//        ActivityScenario.launch(MainActivity::class.java)
-//
-//        // Test für Button Map
-//        onView(withId(R.id.btnMap)).perform(click())
-//        // Überprüfen, ob MapActivity gestartet wird
-//        onView(withId(R.id.mapView)).check(matches(isDisplayed()))
-//    }
+    @Test
+    fun testButtonClicksStartCorrectActivityMap() {
+        // Starte die MainActivity
+        ActivityScenario.launch(MainActivity::class.java)
+
+        // Test für Button Map
+        onView(withId(R.id.btnMap)).perform(click())
+        // Überprüfen, ob MapActivity gestartet wird
+        onView(withId(R.id.mapView)).check(matches(isDisplayed()))
+    }
 
 
 
