@@ -57,7 +57,7 @@ class MainActivityTest {
         // Test für Button Map
         onView(withId(R.id.btnMap)).perform(click())
         // Überprüfen, ob MapActivity gestartet wird
-        onView(withId(R.id.mapView)).check(matches(isDisplayed()))
+        onView(withId(R.id.btnRefresh)).check(matches(isDisplayed()))
     }
 
 
